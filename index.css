@@ -1,0 +1,262 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+body {
+  background-image: url("wallhaven-p88ydp.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 100vh
+}
+
+/* Alinha no centro o quadrado*/
+.container-pai {
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    perspective: 1000px;
+
+}
+/*Faz o quadrado decorado e a animação para js*/
+/* Alinha tudo oque esta dentro do quadrado no centro*/
+.card {
+    background-color: #834343cc;
+    width: 500px;
+    height: 400px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
+
+    transform-style: preserve-3d;
+    transition: transform 0.3s ease;
+}
+/*diminui o tamanho da imagem, e faz ela redonda*/
+.card img {
+    width: 120px;
+    padding: 8px;
+    border-radius: 50%;
+    
+}
+/*Letra colorida*/
+.main-title {
+    font-weight: bold;
+  
+  /* 1. Garante que o GIF carregue como fundo */
+    background-image: url('https://zyo.se/assets/images/name/rainbow.gif');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+  /* 2. Aplica o recorte com TODOS os prefixos necessários */
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  background-clip: text;
+
+  /* 3. Aplica a transparência de forma compatível */
+  -webkit-text-fill-color: transparent;
+  color: transparent !important;
+}
+
+/*Letra pequena em baixo do nome */
+.personal-info ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: left; /* Move o início das palavras para a esquerda */
+  margin-left: 4.0ch; 
+}
+
+/* 3. Estiliza as linhas */
+.personal-info li {
+  font-size: 1rem;
+  color: #8F5252;
+  margin-bottom: 6px;              
+  font-family: sans-serif;
+  
+  /* Garante que o texto e o emoji fiquem na mesma linha com espaço entre eles */
+
+}
+
+/*Letras visuais com  uns bloco*/
+.tags-container {
+    display: flex;         
+    flex-direction: row;   
+    align-items: center;   
+    gap: 10px;   
+    padding: 10px 12px 30px; 
+    
+}
+.tags-container .tag {
+    border: 1px solid #5a2e2e;
+    color: #481C1C;
+    border-radius: 9px;
+    padding: 5px 15px;
+    display: inline-flex;
+    align-items: center;
+    font-size: .75rem;
+    line-height: 1rem;
+}
+
+
+/*Nome de redes social*/
+/*Aqui deixa tudo na lateral*/
+.social-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 15px;
+
+}
+/*aqui alinha, deixa os espaço entre eles, e faz o efeito quando passa o mouse*/
+.social-item {
+    display: inline-flex;
+    align-items: center;  
+    justify-content: center;
+    gap: 8px;     
+    
+    padding: 0px 12px;
+    
+    box-sizing: border-box;
+    border-width: 0;
+    border-style: solid;
+    border-color: #e5e7eb;
+    border-radius: 9999px;
+    cursor: pointer;
+    
+
+    transition: background-color 0.5s ease-in-out; 
+}
+
+.social-item:hover {
+    background-color: rgba(255, 255, 255, 0.15); 
+}
+/*aqui define o tamanho e um efeito na img*/
+.social-item img {
+    width: 2.5rem ;
+    height: 2.5rem ;
+    min-width: 3.5rem ;
+    display: block;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+.social-item img:hover {
+        transform: scale(1.4);
+        z-index: 10;
+}
+/*Esse é a letra (nick das rede social)*/
+.social-item .copyable {
+    font-size: .999rem;
+    line-height: 1rem;
+    color: white;
+    white-space: nowrap; 
+}
+
+/*Separei a parte de quando clicar copiar o nick da rede social*/
+
+.social-item {
+    position: relative;
+}
+
+/* O balãozinho azul "Copiado!" */
+.copy-toast {
+    position: absolute;
+    bottom: -70%; /* Fica posicionado logo acima do card */
+    left: 50%;
+    transform: translateX(-50%);
+    
+    background-color: #3b82f6; /* Azul destaque estilo botão */
+    color: white;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 6px;
+    white-space: nowrap;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    
+    pointer-events: none; /* Não interfere nos cliques */
+    animation: fadeIn 0.2s ease-in-out;
+    z-index: 100;
+}
+
+/* Transição de saída */
+.copy-toast.hide {
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+/* Animação suave para surgir subindo */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, 5px);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, 0);
+    }
+}
+
+
+/*Efeito de neve caindo na tela*/
+/* Container transparente pra neve ficar atrás do card principal */
+#snow-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none; /* Não atrapalha os cliques nos botões */
+    z-index: 1;
+    overflow: hidden;
+}
+
+/* Estilo de cada floquinho */
+.snowflake {
+    position: absolute;
+    top: -10px;
+    color: white;
+    font-size: 1rem;
+    user-select: none;
+    opacity: 0.8;
+    animation: fall linear infinite;
+}
+
+/* Animação caindo da parte superior para a inferior */
+@keyframes fall {
+    0% {
+        transform: translateY(-10px) rotate(0deg);
+        opacity: 0.9;
+    }
+    100% {
+        transform: translateY(105vh) rotate(360deg);
+        opacity: 0.2;
+    }
+}
+
+/*AUDIO*/
+
+.music-btn {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    backdrop-filter: blur(5px);
+    z-index: 100;
+    transition: transform 0.2s ease;
+}
+
+.music-btn:hover {
+    transform: scale(1.1);
+}
