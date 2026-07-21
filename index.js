@@ -103,6 +103,8 @@ function createSnow() {
     }
 }
 
+createSnow();
+
 //AUDIO
 const audio = document.getElementById('bg-música');
 const musicBtn = document.getElementById('music-toggle');
